@@ -29,6 +29,10 @@ namespace MultiShop.IdentityServerdotnet
             {
                 Scopes  = {"CargoFullPermission"}
             },
+               new ApiResource("ResourceBasket")
+            {
+                Scopes  = {"BasketFullPermission"}
+            },
              new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
           
         };
@@ -47,6 +51,7 @@ namespace MultiShop.IdentityServerdotnet
             new ApiScope("DiscountFullPermission","Full authority for discount operations"),
             new ApiScope("OrderFullPermission","Full authority for order operations"),
             new ApiScope("CargoFullPermission","Full authority for cargo operations"),
+            new ApiScope("BasketFullPermission","Full authority for basket operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -61,12 +66,12 @@ namespace MultiShop.IdentityServerdotnet
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes ={"CatalogReadPermission"}
             },
-              //Visitor
+              //Manager
             new Client
             {
                 ClientId = "MultiShopManagerId",
                 ClientName = "MultiShopManagerUser",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes ={"CatalogReadPermission","CatalogFullPermission"}
             },
@@ -74,9 +79,9 @@ namespace MultiShop.IdentityServerdotnet
             {
                 ClientId = "MultiShopAdminId",
                 ClientName = "MultiShopAdminUser",
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
-                AllowedScopes ={"CatalogReadPermission","CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission" ,IdentityServerConstants.LocalApi.ScopeName, IdentityServerConstants.StandardScopes.Email , IdentityServerConstants.StandardScopes.OpenId , IdentityServerConstants.StandardScopes.Profile },
+                AllowedScopes ={"CatalogReadPermission","CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission", "BasketFullPermission", IdentityServerConstants.LocalApi.ScopeName, IdentityServerConstants.StandardScopes.Email , IdentityServerConstants.StandardScopes.OpenId , IdentityServerConstants.StandardScopes.Profile },
                 AccessTokenLifetime = 600
             },
         };
